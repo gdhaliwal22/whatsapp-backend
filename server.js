@@ -9,7 +9,13 @@ const port = process.env.PORT || 9000;
 // middleware
 
 // DB config
-
+const connection_url =
+  "mongodb+srv://admin:5bb3bBsC8Jvqkppo@cluster0.jlsrt.mongodb.net/whatsappdb?retryWrites=true&w=majority";
+mongoose.connect(connection_url, {
+  useCreateIndex: true,
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 // ????
 
 // api routes
@@ -17,3 +23,5 @@ app.get("/", (req, res) => res.status(200).send("Hello World"));
 
 // listener
 app.listen(port, () => console.log(`Listening on local host ${port}`));
+
+// 5bb3bBsC8Jvqkppo
