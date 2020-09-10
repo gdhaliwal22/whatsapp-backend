@@ -8,6 +8,7 @@ const app = express();
 const port = process.env.PORT || 9000;
 
 // middleware
+app.use(express.json());
 
 // DB config
 const connection_url =
@@ -21,6 +22,16 @@ mongoose.connect(connection_url, {
 
 // api routes
 app.get("/", (req, res) => res.status(200).send("Hello World"));
+
+app.get("api/v1/messages/sync", (req, res) => {
+  Messages.find((err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(201).send(data);
+    }
+  });
+});
 
 app.post("/api/v1/messages/new", (req, res) => {
   const dbMessage = req.body;
